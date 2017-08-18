@@ -17,6 +17,8 @@ import TouchableNativeFeedbackSafe
 
 type Props = {
   renderHeader: () => React.Element<any>,
+  onDrawerClose?: () => void,
+  onDrawerOpen?: () => void,
   width: number,
   children: React.Element<any>,
   drawerBackgroundColor: string,
@@ -44,9 +46,15 @@ export default class ExNavigationDrawerLayout extends React.Component {
         }}
         onDrawerClose={() => {
           this.setState({ isOpen: false });
+          if (typeof this.props.onDrawerClose === 'function') {
+            this.props.onDrawerClose();
+          }
         }}
         onDrawerOpen={() => {
           this.setState({ isOpen: true });
+          if (typeof this.props.onDrawerOpen === 'function') {
+            this.props.onDrawerOpen();
+          }
         }}
         drawerBackgroundColor={this.props.drawerBackgroundColor}
         drawerWidth={this.props.width}

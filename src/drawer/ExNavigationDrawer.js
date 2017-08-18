@@ -67,6 +67,8 @@ type Props = {
     navigatorUID: string,
     navigatorContext: ExNavigationDrawerContext
   ) => void,
+  onDrawerClose?: () => void,
+  onDrawerOpen?: () => void,
   onUnregisterNavigatorContext: (navigatorUID: string) => void,
   navigationState: Object,
 };
@@ -138,6 +140,8 @@ class ExNavigationDrawer extends PureComponent<any, Props, State> {
     const drawerLayoutProps = {
       children: this.renderContent(),
       renderHeader: this.props.renderHeader,
+      onDrawerOpen: this.props.onDrawerOpen,
+      onDrawerClose: this.props.onDrawerClose,
       selectedItem: navigationState.routes[navigationState.index].key,
       items: this.state.drawerItems,
       drawerBackgroundColor: this.props.drawerBackgroundColor,
